@@ -1,0 +1,5 @@
+src/*.o
+src/.*.swp
+includes/.*.swp
+src/.*.swo
+includes/.*.swo
