@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 11:18:31 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/16 17:02:19 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 01:06:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // load data into file into folder data today file
 
-void			load(void)
+int				load(void)
 {
 	t_stc		*stc = singleton(NULL);
 	int			fd;
@@ -25,7 +25,7 @@ void			load(void)
 	path = ft_strjoin("./data/", stc->strDate);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return ;
+		return (-1);
 	get_next_line(fd, &line);
 	split = ft_strsplit(line, ' ');
 	stc->workTime = ft_atoi(split[1]);
@@ -37,6 +37,36 @@ void			load(void)
 	ft_strstrdel(split);
 	ft_strdel(&line);
 	close(fd);
+	return (0);
+}
+
+// initialisation first save
+
+void			initSave(void)
+{
+	t_stc		*stc = singleton(NULL);
+	int			fd;
+	char		*path;
+	char		*time;
+	char		*timeBreak;
+	char		*tmp;
+	
+	path = ft_strjoin("./data/", stc->strDate);
+	fd = open(path, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP);
+	if (fd == -1)
+		exit(-1);
+	tmp = ft_itoa(0);
+	time = ft_strjoin("time: ", tmp); 
+	ft_strdel(&tmp);
+	tmp = ft_itoa(0);
+	timeBreak = ft_strjoin("breakTime: ", tmp); 
+	ft_strdel(&tmp);
+	ft_putendl_fd(time, fd);
+	ft_putendl_fd(timeBreak, fd);
+	close(fd);
+	ft_strdel(&path);
+	ft_strdel(&timeBreak);
+	ft_strdel(&time);
 }
 
 // save data into file into folder data

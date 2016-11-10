@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 13:13:53 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/17 13:58:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 01:20:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ static void	initDate(void)
 	stc->day = t->tm_wday;
 	stc->month = t->tm_mon;
 	stc->dateNumber = t->tm_mday;
-	load();
+	if (load() == -1)
+		initSave();
 }
 
 //creation main window ncurse
@@ -148,8 +149,8 @@ void		initMainWindow(void)
 	wbkgd(stc->all, COLOR_PAIR(1));
 	wbkgd(stc->workBreak, COLOR_PAIR(4));
 	singleton(stc);
-	initList();
 	initDate();
+	initList();
 }
 
 //initialisation color ncurse lib

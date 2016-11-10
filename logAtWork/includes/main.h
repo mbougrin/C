@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 11:44:10 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/17 13:56:37 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 01:19:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			initColor(void);
 //initialisation main window
 void			initMainWindow(void);
 //main loop ncurse
-void			loop(void);
+int				loop(void);
 //delete main window and free stc
 void			deleteMainWindow(void);
 //refresh all window
@@ -78,11 +78,13 @@ void			checkKey(void);
 //save data into file
 void			save(void);
 //load data into file today
-void			load(void);
+int				load(void);
 //initialisation historique into list
 void			initList(void);
 // print work break pourcentage
 void			printWorkBreak(void);
+//initilisation first save
+void			initSave(void);
 
 typedef struct		s_lst
 {
