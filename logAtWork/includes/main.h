@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 11:44:10 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/10 01:19:57 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 03:47:52 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define MIN_WORKBREAK 18
 # define MAX_WORKBREAK 20
 
-# define AUTO_SAVE 60
+# define AUTO_SAVE 1
 
 //initialisation ncurse lib
 void			initNcurse(void);

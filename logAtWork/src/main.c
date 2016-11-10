@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 11:44:16 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/10 01:05:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 03:56:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,84 @@ static int	checkDate(void)
 	return (0);
 }
 
+static void	saveLogActivity(void)
+{
+	system("pmset -g log | grep -e 'Display is turned off' | tail -n 1 > tmp/lastoff");
+	system("pmset -g log | grep -e 'Display is turned on' | tail -n 1 > tmp/laston");
+
+}
+
+static void	checkTurn(char *on, char *off)
+{
+	t_stc 		*stc = singleton(NULL);
+	static char		*last;
+	char			**spliton;
+	char			**splitoff;
+	static bool		check;
+
+	if (last != NULL && ft_strcmp(on, last) != 0)
+	{
+		check = false;
+		ft_strdel(&last);
+		stc->key = -2;
+		checkKey();
+		stc->key = 0;
+		return ;
+	}
+	spliton = ft_strsplit(on, ':');
+	splitoff = ft_strsplit(off, ':');
+	stc->key = -2;
+	if (ft_atoi(spliton[0]) < ft_atoi(splitoff[0]) && check == false)
+	{
+		last = ft_strdup(on);
+		check = true;
+		checkKey();
+	}
+	if (ft_atoi(spliton[1]) < ft_atoi(splitoff[1]) && check == false)
+	{
+		last = ft_strdup(on);
+		check = true;
+		checkKey();
+	}
+	if (ft_atoi(spliton[2]) < ft_atoi(splitoff[2]) && check == false)
+	{
+		last = ft_strdup(on);
+		check = true;
+		checkKey();
+	}
+	ft_strstrdel(spliton);
+	ft_strstrdel(splitoff);
+	stc->key = 0;
+}
+
+static void checkActivity(void)
+{
+	char	**on;
+	char	**off;
+	int		fd;
+	char	*line;
+
+	fd = open("tmp/laston", O_RDONLY);
+	get_next_line(fd, &line);
+	on = ft_strsplit(line, ' ');
+	ft_strdel(&line);
+	close(fd);
+	fd = open("tmp/lastoff", O_RDONLY);
+	get_next_line(fd, &line);
+	off = ft_strsplit(line, ' ');
+	ft_strdel(&line);
+	close(fd);
+	checkTurn(on[1], off[1]);
+	ft_strstrdel(on);
+	ft_strstrdel(off);
+}
+
 //main loop program
 
 int			loop(void)
 {
 	t_stc 	*stc = singleton(NULL);
-	int		saveCount = 60;
+	int		saveCount = AUTO_SAVE;
 
 	stc->currentTime = time(NULL);
 	bkgd(COLOR_PAIR(1));
@@ -77,6 +149,8 @@ int			loop(void)
 		{
 			save();
 			saveCount += AUTO_SAVE;
+			saveLogActivity();
+			checkActivity();
 		}
 		if (checkDate() == -1)
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 14:32:19 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/10 15:52:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 03:56:16 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		checkKey(void)
 {
 	t_stc	*stc = singleton(NULL);
 
-	if (stc->key == 112)
+	if (stc->key == -2)
 		timeBreakKey();
 	if (stc->key == 115)
 		save();
