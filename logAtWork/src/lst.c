@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/16 10:15:12 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/10 01:16:13 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 04:20:55 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ void			initList(void)
 {
 	t_stc	*stc = singleton(NULL);
 	int		lstLen = openDirLen();
+	if (lstLen == 1)
+	{
+		stc->lst = NULL;
+		return ;
+	}
 	t_lst	*alst = createLst(lstLen);
 
 	addInfoLst(&alst);

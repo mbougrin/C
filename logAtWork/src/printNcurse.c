@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 10:11:34 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 10:04:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/10 04:39:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ void		printWeekTime(void)
 {
 	t_stc	*stc = singleton(NULL);
 	int		workTime = stc->workTime + (stc->clock / CLOCKS_PER_SEC);
+	if (stc->lst == NULL)
+		return ;
 	int		time = weekTime() + workTime;
 	int		hour, min, sec;
 
@@ -203,6 +205,8 @@ void		printMonthTime(void)
 {
 	t_stc	*stc = singleton(NULL);
 	int		workTime = stc->workTime + (stc->clock / CLOCKS_PER_SEC);
+	if (stc->lst == NULL)
+		return ;
 	int		time = monthTime() + workTime;
 	int		hour, min, sec;
 
@@ -251,6 +255,8 @@ void		printThreeMonthTime(void)
 {
 	t_stc	*stc = singleton(NULL);
 	int		workTime = stc->workTime + (stc->clock / CLOCKS_PER_SEC);
+	if (stc->lst == NULL)
+		return ;
 	int		time = threeMonthTime() + workTime;
 	int		hour, min, sec;
 
@@ -293,6 +299,8 @@ void		printAllTime(void)
 {
 	t_stc	*stc = singleton(NULL);
 	int		workTime = stc->workTime + (stc->clock / CLOCKS_PER_SEC);
+	if (stc->lst == NULL)
+		return ;
 	int		time = allTime(stc->lst) + workTime;
 	int		hour, min, sec;
 
@@ -330,8 +338,10 @@ void		printWorkBreak(void)
 {
 	t_stc	*stc = singleton(NULL);
 	int		workTime = stc->workTime + (stc->clock / CLOCKS_PER_SEC);
-	int		time = allTime(stc->lst) + workTime;
-	int		breakTime = allBreakTime(stc->lst);
+	if (stc->lst == NULL)
+		return ;
+	int	time = allTime(stc->lst) + workTime;
+	int	breakTime = allBreakTime(stc->lst);
 	int	result = (time / 100); 
 	int	i = 100;
 	int	ret = 0;

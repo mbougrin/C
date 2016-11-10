@@ -30,6 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft/
+	@mkdir tmp data
 	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIB) $(INC)
 	@echo "\033[31;31;1m=== Compilation $(NAME)\t\t\033[32;32;mDONE\033[32;32;0m"
 
@@ -47,6 +48,7 @@ clean_no_libft:
 
 fclean: clean_no_libft
 	@echo "\033[31;31;1m=== $(NAME)\t\t\t\t\033[34;34;mREMOVED"
+	@rm -rf tmp data
 	@$(RM) $(NAME)
 	@make -C libft/ fclean
 
