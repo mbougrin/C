@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 11:44:16 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/10 03:56:11 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/14 09:41:08 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,13 @@ static void	checkTurn(char *on, char *off)
 	stc->key = 0;
 }
 
+static int	checkTurnDay(char *on, char *off)
+{
+	if (ft_strcmp(on, off) == 0)
+		return (1);
+	return (0);
+}
+
 static void checkActivity(void)
 {
 	char	**on;
@@ -122,7 +129,8 @@ static void checkActivity(void)
 	off = ft_strsplit(line, ' ');
 	ft_strdel(&line);
 	close(fd);
-	checkTurn(on[1], off[1]);
+	if (checkTurnDay(on[0], off[0]) == 1)
+		checkTurn(on[1], off[1]);
 	ft_strstrdel(on);
 	ft_strstrdel(off);
 }
