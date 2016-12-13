@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 11:18:31 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/10 01:06:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/15 17:17:00 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int				load(void)
 	stc->breakTime = ft_atoi(split[1]);
 	ft_strstrdel(split);
 	ft_strdel(&line);
+	ft_strdel(&path);
 	close(fd);
 	return (0);
 }

@@ -6,19 +6,19 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/16 11:05:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/16 18:08:31 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/16 09:18:02 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
 
 const char *nameDayRet[] = {"Dimanche", "Lundi", "Mardi", \
-									"Mercredi", "Jeudi", "Vendredi", \
-																		"Samedi"};
+							"Mercredi", "Jeudi", "Vendredi", \
+							"Samedi"};
 
-const char *nameMonthRet[] = {"janvier", "fevrier", "mars" ,"avril", "mai", "juin", \
-		                          	"juillet", "aout", "septembre", "octobre", "novembre", \
-																		"decembre"};
+const char *nameMonthRet[] = {"janvier", "fevrier", "mars" ,"avril", "mai", \
+								"juin", "juillet", "aout", "septembre", \
+								"octobre", "novembre", "decembre"};
 
 static int		retMonth(char *str)
 {
@@ -112,7 +112,9 @@ void			sortDay(t_lst **alst)
 		check = tmp;
 		while (check)
 		{
-			if (ft_strcmp(tmp->splitInfo[1], check->splitInfo[1]) < 0\
+			//bug
+			//if (ft_strcmp(tmp->splitInfo[1], check->splitInfo[1]) < 0
+			if (ft_atoi(tmp->splitInfo[1]) < ft_atoi(check->splitInfo[1])\
 					&& tmp->month <= check->month \
 					&& ft_strcmp(tmp->splitInfo[3], check->splitInfo[3]) == 0)
 				swapLst(tmp, check);

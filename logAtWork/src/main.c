@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 11:44:16 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/14 09:41:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/12 12:18:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ static void	saveLogActivity(void)
 
 static void	checkTurn(char *on, char *off)
 {
-	t_stc 		*stc = singleton(NULL);
+	t_stc 			*stc = singleton(NULL);
 	static char		*last;
 	char			**spliton;
 	char			**splitoff;
 	static bool		check;
 
-	if (last != NULL && ft_strcmp(on, last) != 0)
+	if (last != NULL && ft_strcmp(on, last) != 0 && check == true)
 	{
 		check = false;
 		ft_strdel(&last);
@@ -82,24 +82,85 @@ static void	checkTurn(char *on, char *off)
 	spliton = ft_strsplit(on, ':');
 	splitoff = ft_strsplit(off, ':');
 	stc->key = -2;
-	if (ft_atoi(spliton[0]) < ft_atoi(splitoff[0]) && check == false)
+	if (ft_atoi(spliton[0]) < ft_atoi(splitoff[0]) \
+				&& check == false)
 	{
 		last = ft_strdup(on);
 		check = true;
 		checkKey();
+		ft_strstrdel(spliton);
+		ft_strstrdel(splitoff);
+		stc->key = 0;
+		return ;
 	}
-	if (ft_atoi(spliton[1]) < ft_atoi(splitoff[1]) && check == false)
+	if (ft_atoi(spliton[0]) == ft_atoi(splitoff[0]) \
+		&& ft_atoi(spliton[1]) < ft_atoi(splitoff[1]) \
+				&& check == false)
 	{
 		last = ft_strdup(on);
 		check = true;
 		checkKey();
+		ft_strstrdel(spliton);
+		ft_strstrdel(splitoff);
+		stc->key = 0;
+		return ;
 	}
-	if (ft_atoi(spliton[2]) < ft_atoi(splitoff[2]) && check == false)
+	if (ft_atoi(spliton[0]) == ft_atoi(splitoff[0]) 
+			&& ft_atoi(spliton[1]) == ft_atoi(splitoff[1])
+			&& ft_atoi(spliton[2]) < ft_atoi(splitoff[2]) \
+			&& check == false)
 	{
 		last = ft_strdup(on);
 		check = true;
 		checkKey();
+		ft_strstrdel(spliton);
+		ft_strstrdel(splitoff);
+		stc->key = 0;
+		return ;
 	}
+//	if (ft_atoi(spliton[0]) <= ft_atoi(splitoff[0]) && check == false)
+//	{
+		//bug logscreen
+//		last = ft_strdup(on);
+//		check = true;
+//		checkKey();
+//		ft_strstrdel(spliton);
+//		ft_strstrdel(splitoff);
+//		stc->key = 0;
+//		return ;
+//	}
+//		if (ft_atoi(spliton[1]) <= ft_atoi(splitoff[1]) && check == false)
+//		{
+//		last = ft_strdup(on);
+//		check = true;
+//		checkKey();
+//		ft_strstrdel(spliton);
+//		ft_strstrdel(splitoff);
+//		stc->key = 0;
+//		return ;
+//	}
+//			if (ft_atoi(spliton[2]) < ft_atoi(splitoff[2]) && check == false)
+//			{
+//				last = ft_strdup(on);
+//				check = true;
+//				checkKey();
+//				ft_strstrdel(spliton);
+//				ft_strstrdel(splitoff);
+//				stc->key = 0;
+//				return ;
+//			}
+//		}
+//		else if (check == false)
+//		{
+//				last = ft_strdup(on);
+//				check = true;
+//				checkKey();
+//				ft_strstrdel(spliton);
+//				ft_strstrdel(splitoff);
+//				stc->key = 0;
+//				return ;
+//		}
+//	}
 	ft_strstrdel(spliton);
 	ft_strstrdel(splitoff);
 	stc->key = 0;
@@ -166,6 +227,11 @@ int			loop(void)
 	return (27);
 }
 
+static void	ft_git(void)
+{
+	system("sh script.sh");
+}
+
 int			main(void)
 {
 	while (1)
@@ -182,5 +248,6 @@ int			main(void)
 		deleteMainWindow();
 		endwin();
 	}
+	ft_git();
 	return (0);
 }

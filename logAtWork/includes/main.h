@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/03 11:44:10 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/10 04:36:35 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/17 22:50:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,32 @@
 //include opendir
 # include <dirent.h>
 
+//into second
 # define MIN_TIME_WORK 25200
 # define MAX_TIME_WORK 36000
 
+//into second
 # define MIN_TIME_BREAK 5400 
 # define MAX_TIME_BREAK 7200
 
+//into second
 # define MIN_WEEK 126000
 # define MAX_WEEK 252000
 
+//into second
 # define MIN_MONTH 504000
 # define MAX_MONTH 1008000
 
+//into second
 # define MIN_THREE_MONTH 1512000
 # define MAX_THREE_MONTH 3024000
 
-# define MIN_WORKBREAK 18
-# define MAX_WORKBREAK 20
+//into %
+# define MIN_WORKBREAK 20
+# define MAX_WORKBREAK 25
 
-# define AUTO_SAVE 1
+//into second
+# define AUTO_SAVE 5
 
 //initialisation ncurse lib
 void			initNcurse(void);
